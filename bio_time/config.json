@@ -1,0 +1,11 @@
+﻿{
+  "ApplicationName": "bio_time",
+  "Developer": "Adam Shehadeh",
+  "Rate": 35,
+  "Contracts": [
+    {
+      "ClientName": "Matt Krudop",
+      "ContractTitle": ".NET Web Application"
+    }
+  ]
+}
