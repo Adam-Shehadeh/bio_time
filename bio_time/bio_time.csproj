@@ -8,9 +8,10 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>bio_time</RootNamespace>
     <AssemblyName>bio_time</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,18 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\LogHelper.cs" />
     <Compile Include="Models\ConfigModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

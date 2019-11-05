@@ -20,5 +20,19 @@ namespace bio_time.Helpers {
                 throw new FileNotFoundException("Could not find configuration file.");
             }
         }
+        public static void UpdateConfig(ConfigModel configModel)
+        {
+            if (ConfigExists())
+            {
+                string fileContent = JsonConvert.SerializeObject(configModel,Formatting.Indented);
+                using(StreamWriter writer = new StreamWriter("config.json", false))
+                {
+                    writer.Write(fileContent);
+                }
+            } else
+            {
+                throw new FileNotFoundException("Could not find configuration file.");
+            }
+        }
     }
 }

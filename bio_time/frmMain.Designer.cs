@@ -35,6 +35,7 @@
             this.lblTimer = new System.Windows.Forms.Label();
             this.lblSessionStatus = new System.Windows.Forms.Label();
             this.btnClearLog = new System.Windows.Forms.Button();
+            this.lblApplicationOutput = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnAddLog
@@ -44,9 +45,10 @@
             this.btnAddLog.Location = new System.Drawing.Point(480, 211);
             this.btnAddLog.Name = "btnAddLog";
             this.btnAddLog.Size = new System.Drawing.Size(142, 23);
-            this.btnAddLog.TabIndex = 0;
+            this.btnAddLog.TabIndex = 4;
             this.btnAddLog.Text = "Add log to file";
             this.btnAddLog.UseVisualStyleBackColor = true;
+            this.btnAddLog.Click += new System.EventHandler(this.BtnAddLog_Click);
             // 
             // btnOpenFileLocation
             // 
@@ -54,7 +56,7 @@
             this.btnOpenFileLocation.Location = new System.Drawing.Point(480, 240);
             this.btnOpenFileLocation.Name = "btnOpenFileLocation";
             this.btnOpenFileLocation.Size = new System.Drawing.Size(142, 23);
-            this.btnOpenFileLocation.TabIndex = 1;
+            this.btnOpenFileLocation.TabIndex = 5;
             this.btnOpenFileLocation.Text = "Open file location";
             this.btnOpenFileLocation.UseVisualStyleBackColor = true;
             // 
@@ -89,8 +91,9 @@
             this.txtLogContent.Location = new System.Drawing.Point(12, 86);
             this.txtLogContent.Name = "txtLogContent";
             this.txtLogContent.Size = new System.Drawing.Size(462, 206);
-            this.txtLogContent.TabIndex = 4;
+            this.txtLogContent.TabIndex = 1;
             this.txtLogContent.Text = "";
+            this.txtLogContent.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxtLogContent_KeyUp);
             // 
             // label1
             // 
@@ -109,7 +112,8 @@
             this.txtContracts.Location = new System.Drawing.Point(12, 25);
             this.txtContracts.Name = "txtContracts";
             this.txtContracts.Size = new System.Drawing.Size(310, 21);
-            this.txtContracts.TabIndex = 8;
+            this.txtContracts.TabIndex = 7;
+            this.txtContracts.SelectedIndexChanged += new System.EventHandler(this.TxtContracts_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -155,15 +159,24 @@
             this.btnClearLog.Location = new System.Drawing.Point(480, 269);
             this.btnClearLog.Name = "btnClearLog";
             this.btnClearLog.Size = new System.Drawing.Size(142, 23);
-            this.btnClearLog.TabIndex = 13;
+            this.btnClearLog.TabIndex = 6;
             this.btnClearLog.Text = "Clear log file";
             this.btnClearLog.UseVisualStyleBackColor = true;
+            // 
+            // lblApplicationOutput
+            // 
+            this.lblApplicationOutput.AutoSize = true;
+            this.lblApplicationOutput.Location = new System.Drawing.Point(12, 295);
+            this.lblApplicationOutput.Name = "lblApplicationOutput";
+            this.lblApplicationOutput.Size = new System.Drawing.Size(0, 13);
+            this.lblApplicationOutput.TabIndex = 13;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 304);
+            this.ClientSize = new System.Drawing.Size(634, 320);
+            this.Controls.Add(this.lblApplicationOutput);
             this.Controls.Add(this.btnClearLog);
             this.Controls.Add(this.lblSessionStatus);
             this.Controls.Add(this.lblTimer);
@@ -178,7 +191,7 @@
             this.Controls.Add(this.btnAddLog);
             this.Name = "frmMain";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,6 +211,7 @@
         private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.Label lblSessionStatus;
         private System.Windows.Forms.Button btnClearLog;
+        private System.Windows.Forms.Label lblApplicationOutput;
     }
 }
 

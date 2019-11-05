@@ -4,8 +4,15 @@
   "Rate": 35,
   "Contracts": [
     {
+      "Index": 0,
       "ClientName": "Matt Krudop",
       "ContractTitle": ".NET Web Application"
+    },
+    {
+      "Index": 1,
+      "ClientName": "Matt Krudop 2",
+      "ContractTitle": "other"
     }
-  ]
+  ],
+  "LastSelectedContractIndex": 0
 }
