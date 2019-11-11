@@ -1,16 +1,19 @@
 ﻿{
   "ApplicationName": "bio_time",
   "Developer": "Adam Shehadeh",
+  "DeveloperEmail":  "adam.m.shehadeh@gmail.com",
   "Rate": 35,
   "Contracts": [
     {
       "Index": 0,
       "ClientName": "Matt Krudop",
+      "ClientEmail": "adam.m.shehadeh@gmail.com", //"matthew.krudop@decisivebi.com",
       "ContractTitle": ".NET Web Application"
     },
     {
       "Index": 1,
       "ClientName": "Matt Krudop 2",
+      "ClientEmail": "adam.m.shehadeh@gmail.com",
       "ContractTitle": "other"
     }
   ],

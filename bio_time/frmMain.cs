@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,8 +69,8 @@ namespace bio_time {
             SaveLogMessage();
             timer.Stop();
             lblSessionStatus.Text = "Session ended...";
-            //logger.EndSession(elapsedSeconds);
-            logger.EndSession(7469); //Test value
+            logger.EndSession(elapsedSeconds);
+            //logger.EndSession(7469); //Test value
             elapsedSeconds = 0;
         }
 
@@ -123,6 +125,38 @@ namespace bio_time {
         private void BtnAddLog_Click(object sender, EventArgs e)
         {
             SaveLogMessage();
+        }
+
+        private void BtnOpenFileLocation_Click(object sender, EventArgs e)
+        {
+            string filepath = Environment.CurrentDirectory + "\\log.txt";
+            if (File.Exists(filepath))
+            {
+                System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", filepath));
+            } else
+            {
+                MessageBox.Show("Could not find log.txt file.");
+            }
+        }
+
+        private void BtnSendEmail_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to E-mail the log file to " + config.Contracts[txtContracts.SelectedIndex].ClientEmail + "?", "E-mail ", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                EmailHelper.SendEmail(config.DeveloperEmail,
+                "xrnhynpyabefpawf",
+                config.Contracts[txtContracts.SelectedIndex].ClientEmail,
+                "Worklog for "  + config.Contracts[txtContracts.SelectedIndex].ContractTitle + " has been updated.",
+                "");
+            }
+        }
+
+        private void BtnClearLog_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to clear the log file?", "Clear log file", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                logger.ClearLogFile();
+            }
         }
     }
 }

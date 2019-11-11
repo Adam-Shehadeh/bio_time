@@ -23,8 +23,6 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.btnAddLog = new System.Windows.Forms.Button();
-            this.btnOpenFileLocation = new System.Windows.Forms.Button();
             this.btnBeginSession = new System.Windows.Forms.Button();
             this.btnEndSession = new System.Windows.Forms.Button();
             this.txtLogContent = new System.Windows.Forms.RichTextBox();
@@ -34,31 +32,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblTimer = new System.Windows.Forms.Label();
             this.lblSessionStatus = new System.Windows.Forms.Label();
-            this.btnClearLog = new System.Windows.Forms.Button();
             this.lblApplicationOutput = new System.Windows.Forms.Label();
+            this.btnAddLog = new System.Windows.Forms.Button();
+            this.btnOpenFileLocation = new System.Windows.Forms.Button();
+            this.btnClearLog = new System.Windows.Forms.Button();
+            this.btnSendEmail = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btnAddLog
-            // 
-            this.btnAddLog.Enabled = false;
-            this.btnAddLog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddLog.Location = new System.Drawing.Point(480, 211);
-            this.btnAddLog.Name = "btnAddLog";
-            this.btnAddLog.Size = new System.Drawing.Size(142, 23);
-            this.btnAddLog.TabIndex = 4;
-            this.btnAddLog.Text = "Add log to file";
-            this.btnAddLog.UseVisualStyleBackColor = true;
-            this.btnAddLog.Click += new System.EventHandler(this.BtnAddLog_Click);
-            // 
-            // btnOpenFileLocation
-            // 
-            this.btnOpenFileLocation.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenFileLocation.Location = new System.Drawing.Point(480, 240);
-            this.btnOpenFileLocation.Name = "btnOpenFileLocation";
-            this.btnOpenFileLocation.Size = new System.Drawing.Size(142, 23);
-            this.btnOpenFileLocation.TabIndex = 5;
-            this.btnOpenFileLocation.Text = "Open file location";
-            this.btnOpenFileLocation.UseVisualStyleBackColor = true;
             // 
             // btnBeginSession
             // 
@@ -90,7 +69,7 @@
             this.txtLogContent.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLogContent.Location = new System.Drawing.Point(12, 86);
             this.txtLogContent.Name = "txtLogContent";
-            this.txtLogContent.Size = new System.Drawing.Size(462, 206);
+            this.txtLogContent.Size = new System.Drawing.Size(462, 250);
             this.txtLogContent.TabIndex = 1;
             this.txtLogContent.Text = "";
             this.txtLogContent.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxtLogContent_KeyUp);
@@ -153,29 +132,65 @@
             this.lblSessionStatus.Size = new System.Drawing.Size(0, 13);
             this.lblSessionStatus.TabIndex = 12;
             // 
+            // lblApplicationOutput
+            // 
+            this.lblApplicationOutput.AutoSize = true;
+            this.lblApplicationOutput.Location = new System.Drawing.Point(12, 339);
+            this.lblApplicationOutput.Name = "lblApplicationOutput";
+            this.lblApplicationOutput.Size = new System.Drawing.Size(0, 13);
+            this.lblApplicationOutput.TabIndex = 13;
+            // 
+            // btnAddLog
+            // 
+            this.btnAddLog.Enabled = false;
+            this.btnAddLog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddLog.Location = new System.Drawing.Point(480, 226);
+            this.btnAddLog.Name = "btnAddLog";
+            this.btnAddLog.Size = new System.Drawing.Size(142, 23);
+            this.btnAddLog.TabIndex = 4;
+            this.btnAddLog.Text = "Add log to file";
+            this.btnAddLog.UseVisualStyleBackColor = true;
+            this.btnAddLog.Click += new System.EventHandler(this.BtnAddLog_Click);
+            // 
+            // btnOpenFileLocation
+            // 
+            this.btnOpenFileLocation.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenFileLocation.Location = new System.Drawing.Point(480, 255);
+            this.btnOpenFileLocation.Name = "btnOpenFileLocation";
+            this.btnOpenFileLocation.Size = new System.Drawing.Size(142, 23);
+            this.btnOpenFileLocation.TabIndex = 5;
+            this.btnOpenFileLocation.Text = "Open file location";
+            this.btnOpenFileLocation.UseVisualStyleBackColor = true;
+            this.btnOpenFileLocation.Click += new System.EventHandler(this.BtnOpenFileLocation_Click);
+            // 
             // btnClearLog
             // 
             this.btnClearLog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearLog.Location = new System.Drawing.Point(480, 269);
+            this.btnClearLog.Location = new System.Drawing.Point(480, 284);
             this.btnClearLog.Name = "btnClearLog";
             this.btnClearLog.Size = new System.Drawing.Size(142, 23);
             this.btnClearLog.TabIndex = 6;
             this.btnClearLog.Text = "Clear log file";
             this.btnClearLog.UseVisualStyleBackColor = true;
+            this.btnClearLog.Click += new System.EventHandler(this.BtnClearLog_Click);
             // 
-            // lblApplicationOutput
+            // btnSendEmail
             // 
-            this.lblApplicationOutput.AutoSize = true;
-            this.lblApplicationOutput.Location = new System.Drawing.Point(12, 295);
-            this.lblApplicationOutput.Name = "lblApplicationOutput";
-            this.lblApplicationOutput.Size = new System.Drawing.Size(0, 13);
-            this.lblApplicationOutput.TabIndex = 13;
+            this.btnSendEmail.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSendEmail.Location = new System.Drawing.Point(480, 313);
+            this.btnSendEmail.Name = "btnSendEmail";
+            this.btnSendEmail.Size = new System.Drawing.Size(142, 23);
+            this.btnSendEmail.TabIndex = 14;
+            this.btnSendEmail.Text = "Email log to client";
+            this.btnSendEmail.UseVisualStyleBackColor = true;
+            this.btnSendEmail.Click += new System.EventHandler(this.BtnSendEmail_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 320);
+            this.ClientSize = new System.Drawing.Size(634, 361);
+            this.Controls.Add(this.btnSendEmail);
             this.Controls.Add(this.lblApplicationOutput);
             this.Controls.Add(this.btnClearLog);
             this.Controls.Add(this.lblSessionStatus);
@@ -198,9 +213,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnAddLog;
-        private System.Windows.Forms.Button btnOpenFileLocation;
         private System.Windows.Forms.Button btnBeginSession;
         private System.Windows.Forms.Button btnEndSession;
         private System.Windows.Forms.RichTextBox txtLogContent;
@@ -210,8 +222,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.Label lblSessionStatus;
-        private System.Windows.Forms.Button btnClearLog;
         private System.Windows.Forms.Label lblApplicationOutput;
+        private System.Windows.Forms.Button btnAddLog;
+        private System.Windows.Forms.Button btnOpenFileLocation;
+        private System.Windows.Forms.Button btnClearLog;
+        private System.Windows.Forms.Button btnSendEmail;
     }
 }
 

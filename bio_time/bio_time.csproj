@@ -57,6 +57,7 @@
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\LogHelper.cs" />
     <Compile Include="Models\ConfigModel.cs" />
     <Compile Include="Program.cs" />
