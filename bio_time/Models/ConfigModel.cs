@@ -18,5 +18,6 @@ namespace bio_time.Models {
         public string ClientName { get; set; }
         public string ClientEmail { get; set; }
         public string ContractTitle { get; set; }
+        public string LogFileName { get { return ClientName.ToLower().Replace(" ", "") + "_log.txt"; } }
     }
 }

@@ -12,14 +12,15 @@ namespace bio_time.Helpers {
     public class LogHelper {
         ConfigModel configProperties;
         int selectedContractIndex;
+        ContractModel selectedContract;
         public LogHelper(ConfigModel configProperties, int selectedContractIndex)
         {
             this.configProperties = configProperties;
             this.selectedContractIndex = selectedContractIndex;
+            this.selectedContract = configProperties.Contracts.Where(c => c.Index == selectedContractIndex).FirstOrDefault();
         }
         public void BeginSession() {
-            ContractModel selectedContract = configProperties.Contracts.Where(c => c.Index == selectedContractIndex).FirstOrDefault();
-            using (StreamWriter writer = new StreamWriter("log.txt", true)) {
+            using (StreamWriter writer = new StreamWriter(selectedContract.LogFileName, true)) {
                 writer.WriteLine("|--------------------------------------------------------------|");
                 writer.WriteLine("| Client=" + selectedContract.ClientName + "; | " + "Contract=" + selectedContract.ContractTitle + "; |");
                 //writer.WriteLine("| Developer: " + configProperties.Developer + " | " + "Rate: " + configProperties.Rate + " |");
@@ -30,7 +31,7 @@ namespace bio_time.Helpers {
         public void EndSession(int elapsedSeconds) {
             double curEarnings = ConvertSecondsToEarnings(elapsedSeconds);
             double totalEarnings = GetTotalEarnings(curEarnings);
-            using (StreamWriter writer = new StreamWriter("log.txt", true)) {
+            using (StreamWriter writer = new StreamWriter(selectedContract.LogFileName, true)) {
                 writer.WriteLine("| " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString() + " -End of session");
                 writer.WriteLine("|--------------------------------------------------------------|");
                 writer.WriteLine("| _TIME=" + elapsedSeconds+"; _EARNINGS=$" + curEarnings + ";" + " _TOTAL=$" + totalEarnings + "; ");
@@ -46,7 +47,7 @@ namespace bio_time.Helpers {
         private double GetTotalEarnings(double currentSessionEarnings)
         {
             double local = currentSessionEarnings;
-            string fileContents = File.ReadAllText(Environment.CurrentDirectory + "\\log.txt");
+            string fileContents = File.ReadAllText(Environment.CurrentDirectory + "\\" + selectedContract.LogFileName);
             string searchString = "_EARNINGS=$";
             var earningsOccurrances = Regex.Matches(fileContents, searchString);
             int curStartIndex = 0;
@@ -70,7 +71,7 @@ namespace bio_time.Helpers {
             string curTimeStamp = "| " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString() + "  ";
             string curBlankString = "|                         ";
             content = content.Replace("\n", "\n" + curBlankString);
-            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            using (StreamWriter writer = new StreamWriter(selectedContract.LogFileName, true))
             {
                 writer.WriteLine(curTimeStamp + content);
             }
@@ -79,7 +80,7 @@ namespace bio_time.Helpers {
 
         public bool ClearLogFile()
         {
-            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            using (StreamWriter writer = new StreamWriter(selectedContract.LogFileName, true))
             {
                 writer.Write(string.Empty);
             }

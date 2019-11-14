@@ -19,8 +19,9 @@ namespace bio_time {
         private int elapsedSeconds;
         private bool sessionInProgress = false;
         LogHelper logger;
-
         ConfigModel config;
+        ContractModel selectedContract;
+
         public frmMain() {
             InitializeComponent();
             config = ConfigHelper.GetConfigProperties();
@@ -34,6 +35,7 @@ namespace bio_time {
                 TimeSpan time = TimeSpan.FromSeconds(elapsedSeconds);
                 lblTimer.Text = time.ToString(@"hh\:mm\:ss");
             };
+            this.selectedContract = config.Contracts.Where(c => c.Index == txtContracts.SelectedIndex).FirstOrDefault();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -81,6 +83,7 @@ namespace bio_time {
             var configModel = ConfigHelper.GetConfigProperties();
             configModel.LastSelectedContractIndex = ind;
             ConfigHelper.UpdateConfig(configModel);
+            this.selectedContract = config.Contracts.Where(c => c.Index == txtContracts.SelectedIndex).FirstOrDefault();
         }
 
         private void TxtLogContent_KeyUp(object sender, KeyEventArgs e)
@@ -129,7 +132,7 @@ namespace bio_time {
 
         private void BtnOpenFileLocation_Click(object sender, EventArgs e)
         {
-            string filepath = Environment.CurrentDirectory + "\\log.txt";
+            string filepath = Environment.CurrentDirectory + "\\"+ selectedContract.LogFileName;
             if (File.Exists(filepath))
             {
                 System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", filepath));
@@ -157,6 +160,12 @@ namespace bio_time {
             {
                 logger.ClearLogFile();
             }
+        }
+
+        private void FrmMain_Resize(object sender, EventArgs e)
+        {
+            txtLogContent.Width = this.Width - 185;
+            txtLogContent.Height = this.Height - 155;
         }
     }
 }

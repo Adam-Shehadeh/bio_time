@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.btnBeginSession = new System.Windows.Forms.Button();
             this.btnEndSession = new System.Windows.Forms.Button();
             this.txtLogContent = new System.Windows.Forms.RichTextBox();
@@ -204,9 +205,14 @@
             this.Controls.Add(this.btnBeginSession);
             this.Controls.Add(this.btnOpenFileLocation);
             this.Controls.Add(this.btnAddLog);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmMain";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Adam\'s Time Logger";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.Resize += new System.EventHandler(this.FrmMain_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
