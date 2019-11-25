@@ -130,15 +130,27 @@ namespace bio_time {
             SaveLogMessage();
         }
 
-        private void BtnOpenFileLocation_Click(object sender, EventArgs e)
+        private void BtnDownloadFile_Click(object sender, EventArgs e)
         {
-            string filepath = Environment.CurrentDirectory + "\\"+ selectedContract.LogFileName;
-            if (File.Exists(filepath))
+            
+            try
             {
+                string filepath = Environment.CurrentDirectory + "\\" + selectedContract.LogFileName;
+                if (File.Exists(filepath))
+                {
+                    File.Delete(filepath);
+                }
+                var timeLog = SQLHelper.GetLogFiles().Where(r=>r.FileName == selectedContract.LogFileName).FirstOrDefault();
+                using (StreamWriter writer = new StreamWriter(filepath))
+                {
+                    if (timeLog != null)
+                        writer.Write(timeLog.FileContent);
+                }
                 System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", filepath));
-            } else
+            } catch (Exception ex)
             {
-                MessageBox.Show("Could not find log.txt file.");
+                MessageBox.Show("Could not find log.txt file. " + ex.Message);
+
             }
         }
 

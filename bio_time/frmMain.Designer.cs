@@ -35,7 +35,7 @@
             this.lblSessionStatus = new System.Windows.Forms.Label();
             this.lblApplicationOutput = new System.Windows.Forms.Label();
             this.btnAddLog = new System.Windows.Forms.Button();
-            this.btnOpenFileLocation = new System.Windows.Forms.Button();
+            this.btnDownloadFile = new System.Windows.Forms.Button();
             this.btnClearLog = new System.Windows.Forms.Button();
             this.btnSendEmail = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -48,7 +48,7 @@
             this.btnBeginSession.Name = "btnBeginSession";
             this.btnBeginSession.Size = new System.Drawing.Size(142, 23);
             this.btnBeginSession.TabIndex = 2;
-            this.btnBeginSession.Text = "Begin work session";
+            this.btnBeginSession.Text = "Begin Work Session";
             this.btnBeginSession.UseVisualStyleBackColor = true;
             this.btnBeginSession.Click += new System.EventHandler(this.btnBeginSession_Click);
             // 
@@ -60,7 +60,7 @@
             this.btnEndSession.Name = "btnEndSession";
             this.btnEndSession.Size = new System.Drawing.Size(142, 23);
             this.btnEndSession.TabIndex = 3;
-            this.btnEndSession.Text = "End work session";
+            this.btnEndSession.Text = "End Work Session";
             this.btnEndSession.UseVisualStyleBackColor = true;
             this.btnEndSession.Click += new System.EventHandler(this.btnEndSession_Click);
             // 
@@ -149,29 +149,29 @@
             this.btnAddLog.Name = "btnAddLog";
             this.btnAddLog.Size = new System.Drawing.Size(142, 23);
             this.btnAddLog.TabIndex = 4;
-            this.btnAddLog.Text = "Add log to file";
+            this.btnAddLog.Text = "Add Log Entry";
             this.btnAddLog.UseVisualStyleBackColor = true;
             this.btnAddLog.Click += new System.EventHandler(this.BtnAddLog_Click);
             // 
-            // btnOpenFileLocation
+            // btnDownloadFile
             // 
-            this.btnOpenFileLocation.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenFileLocation.Location = new System.Drawing.Point(480, 255);
-            this.btnOpenFileLocation.Name = "btnOpenFileLocation";
-            this.btnOpenFileLocation.Size = new System.Drawing.Size(142, 23);
-            this.btnOpenFileLocation.TabIndex = 5;
-            this.btnOpenFileLocation.Text = "Open file location";
-            this.btnOpenFileLocation.UseVisualStyleBackColor = true;
-            this.btnOpenFileLocation.Click += new System.EventHandler(this.BtnOpenFileLocation_Click);
+            this.btnDownloadFile.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDownloadFile.Location = new System.Drawing.Point(480, 284);
+            this.btnDownloadFile.Name = "btnDownloadFile";
+            this.btnDownloadFile.Size = new System.Drawing.Size(142, 23);
+            this.btnDownloadFile.TabIndex = 5;
+            this.btnDownloadFile.Text = "Download Log File";
+            this.btnDownloadFile.UseVisualStyleBackColor = true;
+            this.btnDownloadFile.Click += new System.EventHandler(this.BtnDownloadFile_Click);
             // 
             // btnClearLog
             // 
             this.btnClearLog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearLog.Location = new System.Drawing.Point(480, 284);
+            this.btnClearLog.Location = new System.Drawing.Point(480, 255);
             this.btnClearLog.Name = "btnClearLog";
             this.btnClearLog.Size = new System.Drawing.Size(142, 23);
             this.btnClearLog.TabIndex = 6;
-            this.btnClearLog.Text = "Clear log file";
+            this.btnClearLog.Text = "Clear Log";
             this.btnClearLog.UseVisualStyleBackColor = true;
             this.btnClearLog.Click += new System.EventHandler(this.BtnClearLog_Click);
             // 
@@ -182,7 +182,7 @@
             this.btnSendEmail.Name = "btnSendEmail";
             this.btnSendEmail.Size = new System.Drawing.Size(142, 23);
             this.btnSendEmail.TabIndex = 14;
-            this.btnSendEmail.Text = "Email log to client";
+            this.btnSendEmail.Text = "Email Log to Client";
             this.btnSendEmail.UseVisualStyleBackColor = true;
             this.btnSendEmail.Click += new System.EventHandler(this.BtnSendEmail_Click);
             // 
@@ -203,7 +203,7 @@
             this.Controls.Add(this.txtLogContent);
             this.Controls.Add(this.btnEndSession);
             this.Controls.Add(this.btnBeginSession);
-            this.Controls.Add(this.btnOpenFileLocation);
+            this.Controls.Add(this.btnDownloadFile);
             this.Controls.Add(this.btnAddLog);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -230,7 +230,7 @@
         private System.Windows.Forms.Label lblSessionStatus;
         private System.Windows.Forms.Label lblApplicationOutput;
         private System.Windows.Forms.Button btnAddLog;
-        private System.Windows.Forms.Button btnOpenFileLocation;
+        private System.Windows.Forms.Button btnDownloadFile;
         private System.Windows.Forms.Button btnClearLog;
         private System.Windows.Forms.Button btnSendEmail;
     }
