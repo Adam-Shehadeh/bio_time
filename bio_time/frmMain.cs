@@ -144,13 +144,14 @@ namespace bio_time {
 
         private void BtnSendEmail_Click(object sender, EventArgs e)
         {
+            string filepath = Environment.CurrentDirectory + "\\" + selectedContract.LogFileName;
             if (MessageBox.Show("Are you sure you want to E-mail the log file to " + config.Contracts[txtContracts.SelectedIndex].ClientEmail + "?", "E-mail ", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 EmailHelper.SendEmail(config.DeveloperEmail,
                 "xrnhynpyabefpawf",
                 config.Contracts[txtContracts.SelectedIndex].ClientEmail,
                 "Worklog for "  + config.Contracts[txtContracts.SelectedIndex].ContractTitle + " has been updated.",
-                "");
+                File.ReadAllText(filepath));
             }
         }
 

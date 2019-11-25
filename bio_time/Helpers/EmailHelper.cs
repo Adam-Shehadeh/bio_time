@@ -18,7 +18,7 @@ namespace bio_time.Helpers
             message.From = new MailAddress(fromEmail);
             message.To.Add(new MailAddress(toEmail));
             message.Subject = subject;
-            message.IsBodyHtml = true;
+            message.IsBodyHtml = false;
             message.Body = messageBodyHtml;
             smtp.Port = 587;
             smtp.Host = "smtp.gmail.com";
