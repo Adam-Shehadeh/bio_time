@@ -36,21 +36,31 @@ namespace bio_time.Helpers
             }
             return local;
         }
-        public static bool SaveLogFile()
+        public static bool SaveLogFile(TimeLogFile model)
         {
             bool local = false;
-            string sql = @" INSERT INTO [dbo].[bio_timelogs]
-                                   ([FileName]
-                                   ,[FileContent]
-                                   ,[LastWrite])
-                             VALUES
-                                   ('file.txt',
-                                   'Hello World',
-                                   CURRENT_TIMESTAMP)";
+            string insertSql = $@"  INSERT INTO [dbo].[bio_timelogs]
+                                           ([FileName]
+                                           ,[FileContent]
+                                           ,[LastWrite])
+                                     VALUES
+                                           (@FileName,
+                                           @FileContent,
+                                           CURRENT_TIMESTAMP)";
+            string updateSql = @" UPDATE dbo.bio_timelogs 
+                                  SET FileContent = @FileContent 
+                                  WHERE [FileName] = @FileName";
+            string sql;
+            if (SQLHelper.GetLogFiles().Where(r => r.FileName == model.FileName).Count() > 0)
+                sql = updateSql;
+            else
+                sql = insertSql;
             using (SqlConnection con = new SqlConnection(ConnectionString))
             using (SqlCommand cmd = new SqlCommand(sql, con))
             {
                 cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@FileName", model.FileName);
+                cmd.Parameters.AddWithValue("@FileContent", model.FileContent);
                 con.Open();
                 if (cmd.ExecuteNonQuery() > 0)
                     local = true;

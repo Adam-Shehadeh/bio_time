@@ -54,6 +54,9 @@ namespace bio_time {
             btnBeginSession.Enabled = false;
             btnEndSession.Enabled = true;
             btnAddLog.Enabled = true;
+            btnDownloadFile.Enabled = false;
+            btnClearLog.Enabled = false;
+            btnSendEmail.Enabled = false;
             txtContracts.Enabled = false;
             timer.Start();
             lblSessionStatus.Text = "Session started...";
@@ -64,9 +67,13 @@ namespace bio_time {
         }
 
         private void btnEndSession_Click(object sender, EventArgs e) {
+            sessionInProgress = false;
             btnBeginSession.Enabled = true;
             btnEndSession.Enabled = false;
             btnAddLog.Enabled = false;
+            btnDownloadFile.Enabled = true;
+            btnClearLog.Enabled = true;
+            btnSendEmail.Enabled = true;
             txtContracts.Enabled = true;
             SaveLogMessage();
             timer.Stop();
@@ -149,7 +156,7 @@ namespace bio_time {
                 System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", filepath));
             } catch (Exception ex)
             {
-                MessageBox.Show("Could not find log.txt file. " + ex.Message);
+                MessageBox.Show("Could not find log file ("+selectedContract.LogFileName+"). " + ex.Message);
 
             }
         }
@@ -158,11 +165,28 @@ namespace bio_time {
         {
             if (MessageBox.Show("Are you sure you want to E-mail the log file to " + config.Contracts[txtContracts.SelectedIndex].ClientEmail + "?", "E-mail ", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                EmailHelper.SendEmail(config.DeveloperEmail,
-                "xrnhynpyabefpawf",
-                config.Contracts[txtContracts.SelectedIndex].ClientEmail,
-                "Worklog for "  + config.Contracts[txtContracts.SelectedIndex].ContractTitle + " has been updated.",
-                "");
+                if (File.Exists(selectedContract.LogFileName))
+                {
+                    START_EMAIL:
+                    if (EmailHelper.SendEmail(config.DeveloperEmail,
+                    "xrnhynpyabefpawf",
+                    config.Contracts[txtContracts.SelectedIndex].ClientEmail,
+                    "Worklog for " + config.Contracts[txtContracts.SelectedIndex].ContractTitle + " has been updated.",
+                    File.ReadAllText(selectedContract.LogFileName)))
+                    {
+                        MessageBox.Show("Successfully emailed log file to " + config.Contracts[txtContracts.SelectedIndex].ClientName + "!", "Email sender thing woot woot", MessageBoxButtons.OK);
+                    } else
+                    {
+                        var result = MessageBox.Show("Failed to send email to " + config.Contracts[txtContracts.SelectedIndex].ClientEmail + "... :(", "Email sender thing failed fk", MessageBoxButtons.RetryCancel);
+                        if (result == DialogResult.Retry)
+                        {
+                            goto START_EMAIL;
+                        }
+                    }
+                } else
+                {
+                    MessageBox.Show("Could not find " + selectedContract.LogFileName, "fkkkkk", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                }
             }
         }
 
