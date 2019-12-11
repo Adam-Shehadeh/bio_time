@@ -17,7 +17,7 @@ namespace bio_time {
 
         private Timer timer;
         private int elapsedSeconds;
-        private bool sessionInProgress = false;
+        private SessionState sessionState = SessionState.Session_Not_Recording;
         LogHelper logger;
         ConfigModel config;
         ContractModel selectedContract;
@@ -40,7 +40,7 @@ namespace bio_time {
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            if (sessionInProgress)
+            if (sessionState != SessionState.Session_Not_Recording)
             {
                 btnEndSession.PerformClick();
             }
@@ -48,26 +48,60 @@ namespace bio_time {
         }
 
         private void btnBeginSession_Click(object sender, EventArgs e) {
-
             logger = new LogHelper(config, txtContracts.SelectedIndex);
-            sessionInProgress = true;
-            btnBeginSession.Enabled = false;
-            btnEndSession.Enabled = true;
-            btnAddLog.Enabled = true;
-            btnDownloadFile.Enabled = false;
-            btnClearLog.Enabled = false;
-            btnSendEmail.Enabled = false;
-            txtContracts.Enabled = false;
-            timer.Start();
-            lblSessionStatus.Text = "Session started...";
-            TimeSpan time = TimeSpan.FromSeconds(elapsedSeconds);
-            lblTimer.Text = time.ToString(@"hh\:mm\:ss");
-            logger.BeginSession();
-            SaveLogMessage();
+
+            switch (sessionState)
+            {
+                case SessionState.Session_Not_Recording:
+                    sessionState = SessionState.Session_Recording;
+                    btnBeginSession.Text = "Pause Session";
+                    btnBeginSession.Enabled = true;
+                    btnEndSession.Enabled = true;
+                    btnAddLog.Enabled = true;
+                    btnDownloadFile.Enabled = false;
+                    btnClearLog.Enabled = false;
+                    btnSendEmail.Enabled = false;
+                    txtContracts.Enabled = false;
+                    timer.Start();
+                    lblSessionStatus.Text = "Session started...";
+                    TimeSpan time = TimeSpan.FromSeconds(elapsedSeconds);
+                    lblTimer.Text = time.ToString(@"hh\:mm\:ss");
+                    logger.BeginSession();
+                    SaveLogMessage();
+                    break;
+                case SessionState.Session_Recording:
+                    sessionState = SessionState.Session_Paused;
+                    btnBeginSession.Text = "Resume Session";
+                    btnEndSession.Enabled = true;
+                    btnAddLog.Enabled = false;
+                    btnDownloadFile.Enabled = false;
+                    btnClearLog.Enabled = false;
+                    btnSendEmail.Enabled = false;
+                    txtContracts.Enabled = false;
+                    timer.Stop();
+                    lblSessionStatus.Text = "Session paused...";
+                    logger.PauseSession();
+                    break;
+                case SessionState.Session_Paused:
+                    sessionState = SessionState.Session_Recording;
+                    btnBeginSession.Text = "Pause Session";
+                    btnBeginSession.Enabled = true;
+                    btnEndSession.Enabled = true;
+                    btnAddLog.Enabled = true;
+                    btnDownloadFile.Enabled = false;
+                    btnClearLog.Enabled = false;
+                    btnSendEmail.Enabled = false;
+                    txtContracts.Enabled = false;
+                    timer.Start();
+                    lblSessionStatus.Text = "Session resumed...";
+                    logger.ResumeSession();
+                    break;
+            }
         }
 
         private void btnEndSession_Click(object sender, EventArgs e) {
-            sessionInProgress = false;
+            sessionState = SessionState.Session_Not_Recording;
+            btnBeginSession.Text = "Begin Session";
             btnBeginSession.Enabled = true;
             btnEndSession.Enabled = false;
             btnAddLog.Enabled = false;
@@ -95,13 +129,7 @@ namespace bio_time {
 
         private void TxtLogContent_KeyUp(object sender, KeyEventArgs e)
         {
-            if (txtLogContent.Text != string.Empty && !sessionInProgress)
-            {
-                btnBeginSession.Enabled = true;
-            } else
-            {
-                btnBeginSession.Enabled = false;
-            }
+
         }
 
         private void frmMain_Load(object sender, EventArgs e)

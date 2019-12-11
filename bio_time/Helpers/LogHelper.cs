@@ -41,6 +41,20 @@ namespace bio_time.Helpers {
                 writer.WriteLine("| " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString() + " -Beginning of session");
             }
         }
+        public void PauseSession()
+        {
+            using (StreamWriter writer = new StreamWriter(selectedContract.LogFileName, true))
+            {
+                writer.WriteLine("| " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString() + " -Session paused.");
+            }
+        }
+        public void ResumeSession()
+        {
+            using (StreamWriter writer = new StreamWriter(selectedContract.LogFileName, true))
+            {
+                writer.WriteLine("| " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString() + " -Session resumed.");
+            }
+        }
         public void EndSession(int elapsedSeconds) {
             double curEarnings = ConvertSecondsToEarnings(elapsedSeconds);
             double totalEarnings = GetTotalEarnings(curEarnings);
